@@ -1,0 +1,56 @@
+#parse("header.vm")
+<script src="${cPath}/js/jquery.uploadfile.js"></script>
+<link href="${cPath}/css/uploadfile.css" rel="stylesheet">
+</head>
+
+<script type="text/javascript">
+
+$(function(){
+    $(".sv-noborder").dblclick(function(){
+        window.location = "$imageUrl" + "&id=" +$ (this).attr('alt');      
+    });
+});
+    
+</script>
+
+<h2>This is Niteco Employee List</h2>
+<form action="$showAddUrl" method="post">
+    <table>
+        <colgroup>
+            <col width="15%">
+            <col width="16%">
+            <col width="21%">
+            <col width="14%">
+            <col width="14%">
+            <col width="20%">
+        </colgroup>
+        <thead>
+            <td>Id</td>
+            <td>Employee Name</td>
+            <td>Department</td>
+            <td>Position</td>
+            <td>Salary</td>
+            <td>Avatar</td>
+        </thead>
+        <tbody>
+        #foreach( $emp in $lstEmployee )
+            <tr>
+                <td>$emp.employeeId</td>
+                <td>$emp.employeeName</td>
+                <td>$emp.department</td>
+                <td>$emp.position</td>
+                <td>$emp.salary</td>
+                <td align="center" style="padding:0">
+                    #if ($emp.picture != "")
+                        $emp.picture
+                    #else
+                        <img class="sv-noborder" alt="$emp.employeeId" src="${cPath}/img/no-avatar.jpg" />
+                    #end
+                </td>
+            </tr>
+        #end
+        </tbody>
+    </table>
+    <input type="submit" value="Add Employee" />
+</form>
+

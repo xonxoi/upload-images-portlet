@@ -1,0 +1,86 @@
+<style>
+table {
+    border-collapse: collapse;
+    width: 30%;
+}
+
+table thead{
+    background-color: #AABBCC;
+}
+
+table td, th{
+    padding-left: 10px;
+    border-collapse: collapse;
+    border: solid 1px black;
+}
+
+table td:first-child{
+    background-color: #AABBCC;
+}
+
+input[type=text]{
+    width: 95%;
+}
+</style>
+<script type="text/javascript">
+function validate(){
+    var id = document.getElementById("empId").value;
+    if(id == "" || id == null ){
+        alert("Please enter employee Id");
+        return;
+    }
+
+    var sal = document.getElementById("inputSal").value;
+    
+    if(!isNaN(sal) && sal != ""){
+        document.getElementById("registForm").submit();
+    }
+    else{
+        alert("Salary must be an integer");
+    }
+}
+
+function showList(){
+    window.location = "$homeUrl";
+}
+</script>
+
+#if ( $request.getParameter("action") == "showAdd" )
+<h2>Employee Registry Form</h2>
+#else
+<h2>Employee Information Form</h2>
+#end
+#if ($errMessage)
+<span style="color:red">$errMessage</span>
+#end
+<form id="registForm" action="$registUrl" method="post">
+<table>
+    <tr>
+        <td>Employee Id</td>
+        <td><input type="text" id="empId" name="id" value="#if($emp.employeeId)$emp.employeeId#end" 
+            #if( $request.getParameter("action") == "showEdit" )
+                readonly
+            #end
+            />
+        </td>
+    </tr>
+    <tr>
+        <td>Employee Name</td>
+        <td><input type="text" name="name" value="#if($emp.employeeName)$emp.employeeName#end" /></td>
+    </tr>
+    <tr>
+        <td>Department</td>
+        <td><input type="text" name="dept" value="#if($emp.department)$emp.department#end" /></td>
+    </tr>
+    <tr>
+        <td>Position</td>
+        <td><input type="text" name="position" value="#if($emp.position)$emp.position#end" /></td>
+    </tr>
+    <tr>
+        <td>Salary</td>
+        <td><input type="text" name="salary" id="inputSal" value="$emp.salary" /></td>
+    </tr>
+</table>
+<input type="button" value="Submit" onclick="validate()" />
+<input type="button" value="Cancel" onclick="showList()"/>    
+</form>

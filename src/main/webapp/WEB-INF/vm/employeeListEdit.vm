@@ -1,0 +1,44 @@
+#parse("header.vm")
+</head>
+
+<h2>This is Niteco Employee List</h2>
+<form action="$showAddUrl" method="post">
+    <table>
+        <colgroup>
+            <col width="13%">
+            <col width="22%">
+            <col width="20%">
+            <col width="20%">
+            <col width="10%">
+            <col width="15">
+        </colgroup>
+        <thead>
+            <td>Id</td>
+            <td>Employee Name</td>
+            <td>Department</td>
+            <td>Position</td>
+            <td>Salary</td>
+            <td>Action</td>
+        </thead>
+        <tbody>
+        #foreach( $emp in $lstEmployee )
+            <tr>
+                <td>$emp.employeeId</td>
+                <td>$emp.employeeName</td>
+                <td>$emp.department</td>
+                <td>$emp.position</td>
+                <td>$emp.salary</td>
+                <td>
+                    #set( $editEmployee = $editUrl + "&id=" + $emp.employeeId )
+                    #set( $removeEmployee = $removeUrl + "&id=" + $emp.employeeId) 
+                    <a href="$editEmployee" >Edit</a>
+                    &nbsp;/&nbsp;
+                    <a href="$removeEmployee" onclick="return confirm('Are you sure to delete this employee ?')" ><b>Delete</b></a>
+                </td>
+            </tr>
+        #end
+        </tbody>
+    </table>
+    <input type="submit" value="Add Employee" />
+</form>
+
