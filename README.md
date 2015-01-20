@@ -1,4 +1,4 @@
 # upload image portlet
-Using basic javascript to upload image then store in metadata on sitevision
+Use basic javascript to upload images then store in sitevision metadata.
 
-In order to execute project, user have to create metadata textfield name 'emloyeeList' on sitevision page
+In order to execute project, users have to create metadata textfield name 'emloyeeList' on sitevision page
